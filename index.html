@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Kojima</title>
+
+  <!-- style -->
+  <link rel="stylesheet" href="./style/reset.css">
+  <link rel="stylesheet" href="./style/header.css">
+  <link rel="stylesheet" href="./style/main.css">
+  <link rel="stylesheet" href="./style/products.css">
+  <link rel="stylesheet" href="./style/about.css">
+  <link rel="stylesheet" href="./style/loginReg.css">
+
+  <!-- script -->
+  <script src="./scripts/vue.global.js"></script>
+  <script src="./scripts/app.js" type="module"></script>
+
+</head>
+<body id="app">
+  <img src="./assets/imgs/BACKGROUND.jpg" alt="backgroun-img" class="background-img" v-if="currentPage == 'Main'">
+  <header class="header">
+    <div class="container">
+      <nav class="header__nav">
+        <img src="./assets/imgs/LOGO.png" alt="logo" class="header__logo">
+        <div class="nav-items-container">
+          <a class="nav-item" @click="currentPage = 'Main'"         :class='{"nav-item-active": currentPage == "Main"}'>Main</a>
+          <a class="nav-item" @click="currentPage = 'Products'"     :class='{"nav-item-active": currentPage == "Products"}'>Products</a>
+          <a class="nav-item" @click="currentPage = 'About'"        :class='{"nav-item-active": currentPage == "About"}'>About Us</a>
+          <a class="nav-item" @click="currentPage = 'Admin'"        :class='{"nav-item-active": currentPage == "Admin"}'        v-if="isAdmin">Admin Panel</a>
+          <a class="nav-item" @click="currentPage = 'Cart'"         :class='{"nav-item-active": currentPage == "Cart"}'         v-if="isAuth">Cart</a>
+          <a class="nav-item" @click="currentPage = 'Login'"        :class='{"nav-item-active": currentPage == "Login"}'        v-if="!isAuth">Login</a>
+          <a class="nav-item" @click="currentPage = 'Registration'" :class='{"nav-item-active": currentPage == "Registration"}' v-if="!isAuth">Registration</a>
+          <a class="nav-item" @click="currentUser = '', currentPage = 'Main'" v-if="isAuth">Exit</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page" v-if="currentPage == 'Main'">
+    <div class="container">
+      <div class="slogan-container">
+        <h1 class="main-slogan">KOJIMA IS GENIUS</h1>
+        <p class="slogan-inf">You gotta buy Kojimas's games and then you'll become GENIUS as well</p>
+      </div>
+      <div class="slider">
+        <div class="slider-container">
+            <div class="slide" v-for="el in sliderImgArray" :style="tSlide" :key="el">
+                <img :src="'./assets/imgs/' + el" alt="slide">
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" v-if="currentPage == 'Products'">
+    <div class="container">
+      <div class="filters-container">
+        <div class="category-container">
+          <p class="filters">Filters: </p>
+          <button class="btn" v-for="el in filtersArray"    @click="currentFilter = el"    :class='{"btn-active": currentFilter == el}'>{{el}}</button>
+        </div>
+        <div class="category-container">
+          <p class="filters">Category: </p>
+          <button class="btn" v-for="el in categoriesArray" @click="currentCategory = el"  :class='{"btn-active": currentCategory == el}'>{{el}}</button>
+        </div>
+        <button class="btn" @click="currentFilter = '', currentCategory = ''">clear filters</button>
+      </div>
+      <div class="products-container">
+        <div class="product-container" v-for="el in copyProductsArray">
+          <img :src="'./assets/imgs/' + el.img" alt="product-img" class="product-img">
+          <p class="product-name">{{el.name}}</p>
+          <p class="product-price">{{el.price}}$</p>
+          <button class="btn">Add to cart</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="page" v-if="currentPage == 'About'">
+    <div class="container">
+      <div class="about-container">
+        <img src="./assets/imgs/map.jpg" alt="map" class="about-img">
+        <div class="about-inf-container">
+          <p class="about-inf">Our location - secret</p>
+          <p class="about-inf">Our email - levanlazarov20@gmail.com</p>
+          <p class="about-inf">Our number - secret</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" v-if="currentPage == 'Login'">
+    <div class="container">
+      <h2 class="login-inf">Log In</h2>
+      <form action="#" class="form" @submit.prevent="login">
+        <div class="form-container">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" v-model="formLogin.userEmail" placeholder='write ur email' class="form-input" required>
+        </div>
+        <div class="form-container">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" v-model="formLogin.userPassword" placeholder='write ur password' class="form-input" required>
+        </div>
+        <div class="form-container">
+          <button class="btn" type="submit">Log In</button>
+          <p>{{ifWrongEmailOrPassword}}</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="page" v-if="currentPage == 'Registration'">
+    <div class="container">
+      <h2 class="login-inf">Registration</h2>
+      <form action="#" class="form" @submit.prevent="reg">
+        <div class="form-container">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" id="name" v-model="formReg.userName" placeholder='write ur name' class="form-input" required>
+        </div>
+        <div class="form-container">
+          <label for="Phone" class="form-label">Phone</label>
+          <input type="tel" id="Phone" v-model="formReg.userPhone" placeholder='write ur phone number' class="form-input" required>
+        </div>
+        <div class="form-container">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" v-model="formReg.userEmail" placeholder='write ur email' class="form-input" required>
+        </div>
+        <div class="form-container">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" v-model="formReg.userPassword" placeholder='write ur password' class="form-input" required>
+        </div>
+        <div class="form-container">
+          <label for="repassword" class="form-label">RePassword</label>
+          <input type="password" id="repassword" v-model="formReg.userRePassword" placeholder='confirm ur password' class="form-input" required>
+        </div>
+        <div class="form-container form-last-container">
+          <label for="check" class="form-label form-checkbox">Agree with rules of this website</label>
+          <input type="checkbox" id="check" v-model="formReg.userCheck" placeholder='confirm ur password' class="form-input" required>
+        </div>
+        <div class="form-container">
+          <button class="btn" type="submit">Registration</button>
+          <p>{{ifWrongRegistration}}</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  
+  
+</body>
+</html>

@@ -1,0 +1,70 @@
+@font-face {
+    font-family: "Moonhouse-yE5M";
+    src: url(../assets/fonts/Moonhouse-yE5M.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "MetaversRounded-EazK8";
+    src: url(../assets/fonts/MetaversRounded-EazK8.otf) format("opentype");
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+}
+
+body {
+    font-family: "MetaversRounded-EazK8", sans-serif;
+    background-color: black;
+    color: white;
+}
+
+.page {
+    padding-top: 50px;
+}
+
+.container {
+    width: 1400px;
+    margin: 0 auto;
+    height: max-content;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn {
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    border: 2px solid rgb(255, 0, 0);
+    width: max-content;
+    font-family: "MetaversRounded-EazK8", sans-serif;
+    cursor: pointer;
+}
+
+.btn-active {
+    color: rgb(255, 255, 255);
+    background-color: rgb(255, 0, 0);
+}
+
+.btn:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(255, 0, 0);
+}
+
+/* media */
+
+@media (max-width: 1400px) {
+    .container {
+        width: 1000px;
+    }
+}
+
+@media (max-width: 1001px) {
+    .container {
+        width: 768px;
+    }
+}

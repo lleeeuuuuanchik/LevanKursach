@@ -1,0 +1,49 @@
+.background-img {
+  position: absolute;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.header {
+  height: 100px;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-items-container {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-item {
+  color: white;
+  cursor: pointer;
+}
+
+.nav-item-active {
+  color: red;
+}
+
+.nav-item:hover {
+  color: red;
+}
+
+/* media */
+
+@media (max-width: 1001px) {
+  .header__nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

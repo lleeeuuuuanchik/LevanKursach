@@ -1,0 +1,20 @@
+.about-container {
+    display: flex;
+    gap: 10px;
+}
+
+.about-inf-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.about-inf {
+    font-size: 20px;
+}
+
+@media (max-width: 1001px) {
+    .about-container {
+        flex-direction: column;
+    }
+}

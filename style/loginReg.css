@@ -1,0 +1,43 @@
+.login-inf {
+    font-size: 40px;
+}
+
+.form {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-last-container {
+    flex-direction: row;
+}
+
+.form-label {
+    font-size: 20px;
+}
+
+.form-checkbox {
+    font-size: 14px;
+}
+
+.form-input {
+    width: max-content;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid red;
+    outline: none;
+    color: white;
+}
+
+.form-input:focus {
+    border-bottom: 3px solid red;
+}
+
