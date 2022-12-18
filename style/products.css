@@ -28,6 +28,12 @@
   gap: 10px;
 }
 
+.product-img {
+  cursor: pointer;
+  width: 400px;
+  height: 600px;
+}
+
 .product-name {
   font-size: 20px;
 }
@@ -36,13 +42,28 @@
   font-size: 30px;
 }
 
+/* -------------- productAbout */
+
+.productAbout-container {
+  display: flex;
+  gap: 20px;
+}
+
+.productAboutInf-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px
+}
+
+.productAboutQuantity-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 /* media */ 
 
 @media (max-width: 1400px) {
-  .product-img {
-    width: 400px;
-    height: 600px;
-  }
 
   .filters-container {
     flex-direction: column;

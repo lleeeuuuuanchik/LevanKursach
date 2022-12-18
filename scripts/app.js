@@ -2,7 +2,7 @@ Vue.createApp({
   data() {
       return {
         // switch pages
-        currentPage: 'Registration',
+        currentPage: 'productAbout',
 
         // slider
         sliderImgArray: [
@@ -16,12 +16,13 @@ Vue.createApp({
 
         //products
         productsArray: [
-          { name: 'Death Stranding',    img: 'PRODUCT1.PNG', category: "Game-film", price: 99, inf: "THE BEST GAME"},
-          { name: 'Metal Gear Solid V', img: 'PRODUCT2.PNG', category: "Shooter",   price: 89, inf: "THE BEST GAME"},
-          { name: 'Metal Gear Rising',  img: 'PRODUCT3.PNG', category: "Shooter",   price: 79, inf: "THE BEST GAME"},
-          { name: 'Silent Hill',        img: 'PRODUCT4.PNG', category: "Horor",     price: 69, inf: "THE BEST GAME"},
+          { name: 'Death Stranding',    img: 'PRODUCT1.PNG', category: "Game-film", price: 99, inf: "THE BEST GAME", quantity: 1, quantityInShop: 20},
+          { name: 'Metal Gear Solid V', img: 'PRODUCT2.PNG', category: "Shooter",   price: 89, inf: "THE BEST GAME", quantity: 1, quantityInShop: 20},
+          { name: 'Metal Gear Rising',  img: 'PRODUCT3.PNG', category: "Shooter",   price: 79, inf: "THE BEST GAME", quantity: 1, quantityInShop: 20},
+          { name: 'Silent Hill',        img: 'PRODUCT4.PNG', category: "Horor",     price: 69, inf: "THE BEST GAME", quantity: 1, quantityInShop: 20},
         ],
-
+        currentProduct: [],
+        
           // filters
         filtersArray: [
           'name', 'price'
@@ -60,6 +61,14 @@ Vue.createApp({
   },
 
   methods: {
+    // products
+    showProductAbout(el) {
+      this.currentPage = "productAbout"
+      this.currentProduct.push(el)
+    },
+
+
+
     // slider
     next() {
       this.currentSlide + 1 > this.sliderImgArray.length -1 ? this.currentSlide = 0 : this.currentSlide++;

@@ -71,14 +71,33 @@
       </div>
       <div class="products-container">
         <div class="product-container" v-for="el in copyProductsArray">
-          <img :src="'./assets/imgs/' + el.img" alt="product-img" class="product-img">
+          <img @click="currentProduct = [], showProductAbout(el)" :src="'./assets/imgs/' + el.img" alt="product-img" class="product-img">
           <p class="product-name">{{el.name}}</p>
           <p class="product-price">{{el.price}}$</p>
-          <button class="btn">Add to cart</button>
+          <button class="btn" @click="">Add to cart</button>
         </div>
       </div>
     </div>
+  </section>
 
+  <section class="page" v-if="currentPage == 'productAbout'">
+    <div class="container">
+      <div class="productAbout-container" v-for="el in currentProduct">
+        <img @click="showProductAbout(el)" :src="'./assets/imgs/' + el.img" alt="product-img" class="product-img">
+        <div class="productAboutInf-container">
+          <p class="product-name" style="font-size: 26px;">{{el.name}}</p>
+          <p class="product-name">information about product - {{el.inf}}</p>
+          <p class="product-name">product's category - {{el.category}}</p>
+          <p class="product-price">{{el.price}}$</p>
+          <div class="productAboutQuantity-container">
+            <button class="btn" @click="el.quantity <= 1 ? el.quantity = 1 : el.quantity--">-</button>
+            <p class="product-name">{{el.quantity}}</p>
+            <button class="btn" @click="el.quantityInShop <= el.quantity ? el.quantity = el.quantityInShop : el.quantity++">+</button>
+          </div>
+          <button class="btn" @click="">Add to cart</button>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="page" v-if="currentPage == 'About'">
