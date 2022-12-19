@@ -152,6 +152,12 @@ Vue.createApp({
       else {
         this.ifWrongRegistration = 'Please, make sure you have confirmed your password correctly.'
       }
+    },
+
+    exit() {
+      this.currentUser = '',
+      this.currentPage = 'Main',
+      localStorage.clear()
     }
   },
 

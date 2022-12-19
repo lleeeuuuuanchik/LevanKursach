@@ -43,7 +43,7 @@
           <a class="nav-item" @click="currentPage = 'Cart'"         :class='{"nav-item-active": currentPage == "Cart"}'         v-if="isAuth">Cart</a>
           <a class="nav-item" @click="currentPage = 'Login'"        :class='{"nav-item-active": currentPage == "Login"}'        v-if="!isAuth">Login</a>
           <a class="nav-item" @click="currentPage = 'Registration'" :class='{"nav-item-active": currentPage == "Registration"}' v-if="!isAuth">Registration</a>
-          <a class="nav-item" @click="currentUser = '', currentPage = 'Main'" v-if="isAuth">Exit</a>
+          <a class="nav-item" @click="exit" v-if="isAuth">Exit</a>
         </div>
       </nav>
     </div>
