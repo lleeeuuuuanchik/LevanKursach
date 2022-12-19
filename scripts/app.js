@@ -1,8 +1,12 @@
 Vue.createApp({
   data() {
       return {
+        // errors
+        errorShow: false,
+        error: "",
+
         // switch pages
-        currentPage: 'productAbout',
+        currentPage: 'Main',
 
         // slider
         sliderImgArray: [
@@ -56,7 +60,10 @@ Vue.createApp({
           userPassword: '',
           userRePassword: '',
           userCheck: false,
-        }
+        },
+
+        // cart
+        cartItemsArray: [],
     }
   },
 
@@ -67,7 +74,29 @@ Vue.createApp({
       this.currentProduct.push(el)
     },
 
-
+    // cart
+    addToCart(el) {
+      if (this.currentUser) {
+        const exist = this.cartItemsArray.find(element => element.name == el.name)
+        if (exist) {
+          if (exist.quantity + el.quantity >= exist.quantityInShop) {
+            exist.quantity = exist.quantityInShop
+            console.log(this.cartItemsArray)
+          }
+          else {
+            exist.quantity += el.quantity
+          }
+        }
+        else {
+          this.cartItemsArray.push({...el})
+          console.log(this.cartItemsArray)
+        }
+      }
+      else {
+        this.errorShow = true
+        this.error = "To add item to cart u gotta login into account"
+      }
+    },
 
     // slider
     next() {
@@ -84,6 +113,7 @@ Vue.createApp({
           this.formLogin.userEmail = ''
           this.formLogin.userPassword = ''
           this.ifWrongEmailOrPassword = ''
+          localStorage.setItem('user', JSON.stringify(this.currentUser))
         }
         else {
           this.formLogin.userPassword = ''
@@ -115,6 +145,7 @@ Vue.createApp({
             this.formReg.userRePassword = ""
             this.formReg.userConfirm = false
             this.currentPage = "Main"
+            localStorage.setItem('user', JSON.stringify(this.currentUser))
           }
         }
       }
@@ -167,6 +198,10 @@ Vue.createApp({
     setInterval( () => {
       this.next()
     }, 1500)
+
+    // login
+    const user = localStorage.getItem('user')
+    user ? this.currentUser = JSON.parse(user) : ''
   }
 
 }).mount('#app')
