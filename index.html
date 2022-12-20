@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="./style/about.css">
   <link rel="stylesheet" href="./style/loginReg.css">
   <link rel="stylesheet" href="./style/errors.css">
+  <link rel="stylesheet" href="./style/cart.css">
 
   <!-- script -->
   <script src="./scripts/vue.global.js"></script>
@@ -180,14 +181,24 @@
 
   <section class="Page" v-if="currentPage == 'Cart'">
     <div class="container">
-      <div class="products-container">
-        <div class="product-container" v-for="el in cartItemsArray">
-          <img :src="'./assets/imgs/' + el.img" alt="product-img" class="product-img">
-          <p class="product-name">{{el.name}}</p>
-          <p class="product-name">{{el.quantity}}</p>
-          <p class="product-price">{{el.price}}$</p>
+      <div class="cart-inf-container">
+        <h2 class="cart-inf">Cart</h2>
+        <button class="btn" @click="cartItemsArray = []" v-if="cartItemsArray.length">clear cart</button>
+      </div>
+      <div class="cart-items-container">
+        <div class="cart-item-container" v-for="el in cartItemsArray">
+          <img :src="'./assets/imgs/' + el.img" alt="cart img" class="cart-item-img">
+          <p class="cart-item-name" >{{el.name}}</p>
+          <p class="cart-item-totalPrice">Total Price: <span style="color: red;">{{el.price * el.quantity}}</span></p>
+          <div class="cart-change-quantity-container">
+            <button class="btn" @click="el.quantity <= 1 ? el.quantity = 1 : el.quantity--">-</button>
+            <p class="cart-item-quantity">{{el.quantity}}</p>
+            <button class="btn"  @click="el.quantityInShop <= el.quantity ? el.quantity = el.quantityInShop : el.quantity++">+</button>
+          </div>
+          <button class="btn" @click="deleteFromCart(el)">remove item</button>
         </div>
-      </div>  
+      </div>
+      <button class="btn" style="margin-top: 20px;" v-if="cartItemsArray.length">get order</button>
     </div>
   </section>
 

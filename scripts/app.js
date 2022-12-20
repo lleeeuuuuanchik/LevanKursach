@@ -6,7 +6,7 @@ Vue.createApp({
         error: "",
 
         // switch pages
-        currentPage: 'Main',
+        currentPage: 'Cart',
 
         // slider
         sliderImgArray: [
@@ -96,6 +96,12 @@ Vue.createApp({
         this.errorShow = true
         this.error = "To add item to cart u gotta login into account"
       }
+    },
+
+    deleteFromCart(el) {
+      const find = this.cartItemsArray.findIndex(element => element.name == el.name)
+      console.log(find);
+      this.cartItemsArray.splice(find, 1)
     },
 
     // slider
@@ -195,7 +201,7 @@ Vue.createApp({
     },
 
     isAdmin() {
-      return this.currentUser && this.currentUser.role == 'admin'
+      return this.currentUser && this.currentUser.userRole == 'admin'
     }
   },
 
