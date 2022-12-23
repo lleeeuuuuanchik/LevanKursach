@@ -6,7 +6,7 @@ Vue.createApp({
         error: "",
 
         // switch pages
-        currentPage: 'Profile',
+        currentPage: 'Main',
 
         // slider
         sliderImgArray: [
