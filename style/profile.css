@@ -1,0 +1,42 @@
+.profile-inf-container {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+}
+.profile-user-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.profile-img {
+    width: 200px;
+    height: 200px;
+
+}
+.profile-inf {
+    font-size: 18px;
+}
+.profile-purchases {
+    margin: 20px 0px;
+}
+
+.profile-purchases-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+.purchase-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+.Profile-purchase-img {
+    width: 100px;
+    height: 150px;
+}
+.Profile-purchase-name {
+    font-size: 20px;
+}
+.Profile-purchase-activate {
+    font-size: 20px;
+}

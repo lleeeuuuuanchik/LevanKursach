@@ -10,6 +10,7 @@
 
 .category-container {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 20px;
 }
@@ -70,5 +71,12 @@
     gap: 10px;
   }
 
+}
+
+@media (max-width: 768px) {
+  .product-img {
+    width: 300px;
+    height: 400px;
+  }
 }
 

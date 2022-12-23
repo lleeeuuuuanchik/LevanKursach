@@ -1,0 +1,51 @@
+.admin-inf {
+    margin-top: 40px;
+    font-size: 30px;
+}
+.admin__categories-container {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 30px;
+   
+}
+.admin__category-container {
+    margin-top: 20px;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+   
+}
+.admin__category-name {
+    font-size: 20px;
+}
+
+.admin-input {
+    border: none;
+    border-bottom: 3px solid red;
+    background-color: transparent;
+    padding: 10px 20px;
+    color: white;
+    outline: none;
+    width: 300px;
+}
+
+.admin-form {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-end;
+}
+.admin__input-container {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.admin-label {
+}
+.admin-input {
+}

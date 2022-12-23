@@ -6,7 +6,7 @@ Vue.createApp({
         error: "",
 
         // switch pages
-        currentPage: 'Cart',
+        currentPage: 'Profile',
 
         // slider
         sliderImgArray: [
@@ -26,6 +26,15 @@ Vue.createApp({
           { name: 'Silent Hill',        img: 'PRODUCT4.PNG', category: "Horor",     price: 69, inf: "THE BEST GAME", quantity: 1, quantityInShop: 20},
         ],
         currentProduct: [],
+        addProduct: {
+          name: "",
+          img: "noGame.png",
+          category: "", 
+          price: "", 
+          inf: "", 
+          quantity: 1,
+          quantityInShop: '' 
+        },
         
           // filters
         filtersArray: [
@@ -37,7 +46,8 @@ Vue.createApp({
           'Game-film', 'Shooter', 'Horor'
         ],
         currentCategory: '',
-        
+        addCategory: "",
+
         // login and reg
         ifWrongEmailOrPassword: "",
         ifWrongRegistration: "",
@@ -64,14 +74,37 @@ Vue.createApp({
 
         // cart
         cartItemsArray: [],
+
+        // profileShow
+        purchasesArray: []
     }
   },
 
   methods: {
+    // categories
+    addCategoryToArray() {
+      this.categoriesArray.push(this.addCategory)
+    },
+
+    deleteCategory(element) {
+      const findElemet = this.categoriesArray.findIndex(el => el == element)
+      this.categoriesArray.splice(findElemet, 1)
+    },
+
     // products
     showProductAbout(el) {
       this.currentPage = "productAbout"
       this.currentProduct.push(el)
+    },
+
+    addProductToArray() {  
+      parseInt(this.addProduct.quantityInShop)
+      this.productsArray.push({...this.addProduct})
+      this.addProduct.name = ""
+      this.addProduct.category = ""
+      this.addProduct.price = ""
+      this.addProduct.inf = ""
+      this.addProduct.quantityInShop = ""
     },
 
     // cart
@@ -102,6 +135,15 @@ Vue.createApp({
       const find = this.cartItemsArray.findIndex(element => element.name == el.name)
       console.log(find);
       this.cartItemsArray.splice(find, 1)
+    },
+
+    // profile
+
+    addToPurchases() {
+      this.errorShow = true
+      this.error = "Thank YOUUUUU! <3"
+      this.purchasesArray.push(...this.cartItemsArray),
+      this.cartItemsArray = []
     },
 
     // slider

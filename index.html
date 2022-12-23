@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="./style/loginReg.css">
   <link rel="stylesheet" href="./style/errors.css">
   <link rel="stylesheet" href="./style/cart.css">
+  <link rel="stylesheet" href="./style/admin.css">
+  <link rel="stylesheet" href="./style/profile.css">
 
   <!-- script -->
   <script src="./scripts/vue.global.js"></script>
@@ -25,7 +27,7 @@
 <body id="app">
   <div class="errorsPage" v-if="errorShow">
     <div class="error-background">
-      <p class="error-inf" style="font-size: 26px;">Error</p>
+      <p class="error-inf" style="font-size: 26px;">Oh...</p>
       <p class="error-inf">{{error}}</p>
       <button class="btn" @click="error = '', errorShow = false">Okay</button>
     </div>
@@ -42,6 +44,7 @@
           <a class="nav-item" @click="currentPage = 'About'"        :class='{"nav-item-active": currentPage == "About"}'>About Us</a>
           <a class="nav-item" @click="currentPage = 'Admin'"        :class='{"nav-item-active": currentPage == "Admin"}'        v-if="isAdmin">Admin Panel</a>
           <a class="nav-item" @click="currentPage = 'Cart'"         :class='{"nav-item-active": currentPage == "Cart"}'         v-if="isAuth">Cart</a>
+          <a class="nav-item" @click="currentPage = 'Profile'"         :class='{"nav-item-active": currentPage == "Profile"}'         v-if="isAuth">Profile</a>
           <a class="nav-item" @click="currentPage = 'Login'"        :class='{"nav-item-active": currentPage == "Login"}'        v-if="!isAuth">Login</a>
           <a class="nav-item" @click="currentPage = 'Registration'" :class='{"nav-item-active": currentPage == "Registration"}' v-if="!isAuth">Registration</a>
           <a class="nav-item" @click="exit" v-if="isAuth">Exit</a>
@@ -198,11 +201,73 @@
           <button class="btn" @click="deleteFromCart(el)">remove item</button>
         </div>
       </div>
-      <button class="btn" style="margin-top: 20px;" v-if="cartItemsArray.length">get order</button>
+      <button class="btn" style="margin-top: 20px;" @click="addToPurchases" v-if="cartItemsArray.length">get order</button>
     </div>
   </section>
 
+  <section class="Page" v-if="currentPage == 'Admin'">
+    <div class="container">
+      <p class="admin-inf">Delete categories:</p>
+      <div class="admin__categories-container">
+        <div class="admin__category-container" v-for="el in categoriesArray">
+          <p class="admin__category-name">{{el}}</p>
+          <button class="btn" @click="deleteCategory(el)">Delete category</button>
+        </div>
+      </div>
+      <p class="admin-inf">Add category:</p>
+      <div class="admin__category-container">
+        <input type="text" v-model="addCategory" class="admin-input">
+        <button class="btn" @click="addCategoryToArray">Add category</button>
+      </div>
+      <p class="admin-inf">Add product:</p>
+      <form action="#" class="admin-form" @submit.prevent="addProductToArray">
+        <div class="admin__input-container">
+          <label for="name" class="admin-label">Add name:</label>
+          <input id="name" type="text" v-model="addProduct.name" class="admin-input">
+        </div>
+        <div class="admin__input-container">
+          <label for="category" class="admin-label">Add category:</label>
+          <input id="category" v-model="addProduct.category" type="text" class="admin-input">
+        </div>
+        <div class="admin__input-container">
+          <label for="price" class="admin-label">Add price:</label>
+          <input id="price" v-model="addProduct.price" type="text" class="admin-input">
+        </div>
+        <div class="admin__input-container">
+          <label for="inf" class="admin-label">Add inf:</label>
+          <input id="inf" v-model="addProduct.inf" type="text" class="admin-input">
+        </div>
+        <div class="admin__input-container">
+          <label for="quantity" class="admin-label">Add quantity in shop:</label>
+          <input id="quantity" v-model="addProduct.quantityInShop" type="text" class="admin-input">
+        </div>
+        <div class="admin__input-container">
+          <button class="btn" type="submit">Add Product</button>
+        </div>
+      </form>
+    </div>
+  </section>
   
-  
+  <section class="Page" v-if="currentPage == 'Profile'"> 
+    <div class="container">
+      <div class="profile-inf-container">
+        <img src="./assets/imgs/user.jpg" alt="user" class="profile-img">
+        <div class="profile-user-container">
+          <p class="profile-inf">name: {{currentUser.userName}}</p>
+          <p class="profile-inf">email: {{currentUser.userEmail}}</p>
+        </div>
+      </div>
+      <h2 class="profile-purchases">Your purchases:</h2>
+      <p class="profile-inf" style="margin-top: 10px;" v-if="purchasesArray.length == 0">Here will be your purchases</p>
+      <div class="profile-purchases-container">
+        <div class="purchase-container" v-for="el in purchasesArray">
+          <img :src="'./assets/imgs/' + el.img" alt="purchase" class="Profile-purchase-img">
+          <p class="Profile-purchase-name">{{el.name}}</p>
+          <p class="Profile-purchase-activate">Activate code: HTTS-SDSA-23SA-SDO9</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </body>
 </html>
